@@ -190,6 +190,22 @@ class Sound(Base):
         nullable=True
     )
 
+    external_id: Mapped[str | None] = mapped_column(
+        Text,
+        unique=True,
+        nullable=True
+    )
+
+    license: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True
+    )
+
+    source_url: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True
+    )
+
     type: Mapped[str | None] = mapped_column(
         Text,
         nullable=True

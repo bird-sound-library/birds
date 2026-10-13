@@ -10,20 +10,21 @@ class CategoryResponse(BaseModel):
         "from_attributes": True
     }
 
-
 class SoundResponse(BaseModel):
     sound_id: int
-    title: str | None
-    file_url: str | None
-    type: str | None
-    source: str | None
-    description: str | None
-    duration: int | None
+    title: str | None = None
+    file_url: str | None = None
+    type: str | None = None
+    source: str | None = None
+    description: str | None = None
+    duration: int | None = None
+    external_id: str | None = None
+    license: str | None = None
+    source_url: str | None = None
 
     model_config = {
         "from_attributes": True
     }
-
 
 class BirdResponse(BaseModel):
     bird_id: int

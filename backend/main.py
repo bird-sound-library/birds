@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from database import get_db
 from models import Bird
-from schemas import BirdResponse
+from schemas import BirdResponse, SoundResponse
 
 
 app = FastAPI()
@@ -42,3 +42,26 @@ def get_bird(bird_id: int, db: Session = Depends(get_db)):
         )
 
     return bird
+
+@app.get(
+    "/birds/{bird_id}/sounds",
+    response_model=list[SoundResponse]
+)
+def get_bird_sounds(
+    bird_id: int,
+    db: Session = Depends(get_db)
+):
+    bird = (
+        db.query(Bird)
+        .options(selectinload(Bird.sounds))
+        .filter(Bird.bird_id == bird_id)
+        .first()
+    )
+
+    if bird is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Bird not found"
+        )
+
+    return bird.sounds
