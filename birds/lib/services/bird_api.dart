@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../../models/sound.dart';
 
 import '../../models/bird.dart';
 
@@ -43,4 +44,23 @@ class BirdApi {
       jsonDecode(response.body) as Map<String, dynamic>,
     );
   }
+
+Future<List<Sound>> getBirdSounds(int birdId) async {
+  final response = await http
+      .get(Uri.parse('$baseUrl/birds/$birdId/sounds'))
+      .timeout(const Duration(seconds: 15));
+
+  if (response.statusCode != 200) {
+    throw Exception(
+      'Failed to load sounds: HTTP ${response.statusCode}',
+    );
+  }
+
+  final List<dynamic> jsonList = jsonDecode(response.body);
+
+  return jsonList
+      .map((json) => Sound.fromJson(json as Map<String, dynamic>))
+      .toList();
+}
+
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'models/bird.dart';
 import 'services/bird_api.dart';
+import 'screens/bird_details_page.dart';
 
 void main() {
   runApp(const BirdsApp());
@@ -125,7 +126,12 @@ class _BirdsPageState extends State<BirdsPage> {
                 ),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
-                  // Details screen will be added next.
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => BirdDetailsPage(bird: bird),
+                    ),
+                  );
                 },
               );
             },
