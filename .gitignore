@@ -171,3 +171,25 @@ app.*.symbols
 .agents/rules/personal-*
 .agents/skills/personal-*
 /.agent-shell/
+
+# Environment
+.env
+.env.*
+!.env.example
+backend/.env
+
+# Python
+backend/.venv/
+backend/__pycache__/
+*.py[cod]
+
+# Uploaded recordings
+backend/uploads/
+
+# Flutter
+birds/.dart_tool/
+birds/build/
+birds/.flutter-plugins-dependencies
+
+# Local backups
+backups/

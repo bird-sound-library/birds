@@ -63,4 +63,36 @@ Future<List<Sound>> getBirdSounds(int birdId) async {
       .toList();
 }
 
+Future<Map<String, dynamic>> uploadRecording(
+  String filePath, {
+  String? location,
+}) async {
+  final uri = Uri.parse('$baseUrl/recordings');
+
+  final request = http.MultipartRequest('POST', uri);
+
+  request.files.add(
+    await http.MultipartFile.fromPath('file', filePath),
+  );
+
+  if (location != null && location.isNotEmpty) {
+    request.fields['location'] = location;
+  }
+
+  final streamedResponse = await request.send().timeout(
+    const Duration(seconds: 60),
+  );
+
+  final response = await http.Response.fromStream(streamedResponse);
+
+  if (response.statusCode != 201) {
+    throw Exception(
+      'Upload failed (${response.statusCode}): ${response.body}',
+    );
+  }
+
+  return jsonDecode(response.body) as Map<String, dynamic>;
+}
+
+
 }

@@ -1,3 +1,5 @@
+from datetime import datetime
+from decimal import Decimal
 from pydantic import BaseModel
 
 
@@ -36,6 +38,18 @@ class BirdResponse(BaseModel):
 
     categories: list[CategoryResponse] = []
     sounds: list[SoundResponse] = []
+
+    model_config = {
+        "from_attributes": True
+    }
+class RecordingResponse(BaseModel):
+    recording_id: int
+    file_url: str | None
+    duration: Decimal | None
+    recorded_at: datetime | None
+    location: str | None
+    status: str | None
+    confidence: Decimal | None
 
     model_config = {
         "from_attributes": True

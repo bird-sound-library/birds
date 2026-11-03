@@ -37,6 +37,7 @@ dependencies:
   http: ^1.6.0
   just_audio: ^0.10.6
   just_audio_windows: ^0.2.3
+  record: ^7.1.2
 
 dev_dependencies:
   flutter_test:

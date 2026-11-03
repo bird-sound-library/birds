@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'models/bird.dart';
 import 'services/bird_api.dart';
 import 'screens/bird_details_page.dart';
+import 'screens/recording_page.dart';
 
 void main() {
   runApp(const BirdsApp());
@@ -137,6 +138,18 @@ class _BirdsPageState extends State<BirdsPage> {
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const RecordingPage(),
+            ),
+          );
+        },
+        icon: const Icon(Icons.mic),
+        label: const Text('Record bird'),
       ),
     );
   }
