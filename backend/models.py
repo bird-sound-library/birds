@@ -1,14 +1,19 @@
 from datetime import datetime
 from decimal import Decimal
+import uuid
 
 from sqlalchemy import (
     Integer,
     Text,
+    String,
     Numeric,
     DateTime,
     ForeignKey,
     Table,
     Column,
+    Boolean,
+    func,
+    Uuid,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -252,6 +257,95 @@ class Sound(Base):
         back_populates="sound"
     )
 
+# ============================================================
+# User
+# ============================================================
+
+class User(Base):
+    __tablename__ = "users"
+
+    user_id: Mapped[int] = mapped_column(
+        Integer,
+        primary_key=True
+    )
+
+    email: Mapped[str] = mapped_column(
+        String(320),
+        unique=True,
+        index=True,
+        nullable=False
+    )
+
+    password_hash: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        nullable=False
+    )
+
+    is_active: Mapped[bool] = mapped_column(
+        Boolean,
+        default=True,
+        server_default="true",
+        nullable=False
+    )
+
+    recordings: Mapped[list["Recording"]] = relationship(
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True
+    )
+
+    sessions: Mapped[list["UserSession"]] = relationship(
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True
+    )
+
+class UserSession(Base):
+    __tablename__ = "user_sessions"
+
+    session_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid,
+        primary_key=True,
+        default=uuid.uuid4
+    )
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.user_id", ondelete="CASCADE"),
+        nullable=False,
+        index=True
+    )
+
+    refresh_token_hash: Mapped[str] = mapped_column(
+        String(64),
+        unique=True,
+        nullable=False
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        nullable=False
+    )
+
+    expires_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False
+    )
+
+    revoked_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True
+    )
+
+    user: Mapped["User"] = relationship(
+        back_populates="sessions"
+    )
 
 # ============================================================
 # Recording
@@ -263,6 +357,12 @@ class Recording(Base):
     recording_id: Mapped[int] = mapped_column(
         Integer,
         primary_key=True
+    )
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.user_id", ondelete="CASCADE"),
+        nullable=False,
+        index=True
     )
 
     file_url: Mapped[str | None] = mapped_column(
@@ -296,8 +396,14 @@ class Recording(Base):
     )
 
     # Identification results
+    user: Mapped["User"] = relationship(
+        back_populates="recordings"
+    )
+
     identifications: Mapped[list["IdentifiedAs"]] = relationship(
-        back_populates="recording"
+        back_populates="recording",
+        cascade="all, delete-orphan",
+        passive_deletes=True
     )
 
 
@@ -350,7 +456,7 @@ class IdentifiedAs(Base):
     # recording_id + bird_id
 
     recording_id: Mapped[int] = mapped_column(
-        ForeignKey("recording.recording_id"),
+        ForeignKey("recording.recording_id", ondelete="CASCADE"),
         primary_key=True
     )
 

@@ -1,7 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel
-
+from pydantic import BaseModel, EmailStr, Field
 
 class CategoryResponse(BaseModel):
     category_id: int
@@ -36,12 +35,13 @@ class BirdResponse(BaseModel):
     image_url: str | None
     description: str | None
 
-    categories: list[CategoryResponse] = []
-    sounds: list[SoundResponse] = []
+    categories: list[CategoryResponse] = Field(default_factory=list)
+    sounds: list[SoundResponse] = Field(default_factory=list)
 
     model_config = {
         "from_attributes": True
     }
+
 class RecordingResponse(BaseModel):
     recording_id: int
     file_url: str | None
@@ -54,3 +54,29 @@ class RecordingResponse(BaseModel):
     model_config = {
         "from_attributes": True
     }
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=8, max_length=128)
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class UserResponse(BaseModel):
+    user_id: int
+    email: EmailStr
+    created_at: datetime
+    is_active: bool
+
+    model_config = {
+        "from_attributes": True
+    }
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
