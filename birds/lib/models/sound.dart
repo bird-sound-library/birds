@@ -5,7 +5,10 @@ class Sound {
   final String? fileUrl;
   final String? type;
   final String? source;
+  final String? recordist;
+  final String? description;
   final int? duration;
+  final String? externalId;
   final String? license;
   final String? sourceUrl;
 
@@ -15,7 +18,10 @@ class Sound {
     this.fileUrl,
     this.type,
     this.source,
+    this.recordist,
+    this.description,
     this.duration,
+    this.externalId,
     this.license,
     this.sourceUrl,
   });
@@ -27,7 +33,10 @@ class Sound {
       fileUrl: json['file_url'] as String?,
       type: json['type'] as String?,
       source: json['source'] as String?,
+      recordist: json['recordist'] as String?,
+      description: json['description'] as String?,
       duration: json['duration'] as int?,
+      externalId: json['external_id'] as String?,
       license: json['license'] as String?,
       sourceUrl: json['source_url'] as String?,
     );

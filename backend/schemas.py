@@ -17,6 +17,7 @@ class SoundResponse(BaseModel):
     file_url: str | None = None
     type: str | None = None
     source: str | None = None
+    recordist: str | None = None
     description: str | None = None
     duration: int | None = None
     external_id: str | None = None
@@ -80,3 +81,6 @@ class TokenResponse(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str

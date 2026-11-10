@@ -48,10 +48,12 @@ has_sound = Table(
     Column(
         "bird_id",
         ForeignKey("bird.bird_id"),
+        primary_key=True
     ),
     Column(
         "sound_id",
         ForeignKey("sound.sound_id"),
+        primary_key=True
     ),
 )
 
@@ -75,6 +77,7 @@ class Bird(Base):
 
     scientific_name: Mapped[str | None] = mapped_column(
         Text,
+        unique=True,
         nullable=True
     )
 
@@ -130,6 +133,7 @@ class Category(Base):
 
     name: Mapped[str | None] = mapped_column(
         Text,
+        unique=True,
         nullable=True
     )
 
@@ -179,6 +183,10 @@ class Category(Base):
 
 class Sound(Base):
     __tablename__ = "sound"
+    recordist: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True
+    )
 
     sound_id: Mapped[int] = mapped_column(
         Integer,
