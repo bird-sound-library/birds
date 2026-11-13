@@ -1,4 +1,6 @@
+import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:record/record.dart';
 
 class AudioRecorderService {
@@ -19,13 +21,20 @@ class AudioRecorderService {
       throw Exception('Microphone permission denied');
     }
 
+    // On web the recorder ignores the path (it records into a blob),
+    // but on Windows/desktop it needs a real file path.
+    final path = kIsWeb
+        ? ''
+        : '${Directory.systemTemp.path}${Platform.pathSeparator}'
+            'bird_${DateTime.now().millisecondsSinceEpoch}.wav';
+
     await _recorder.start(
       const RecordConfig(
         encoder: AudioEncoder.wav,
         sampleRate: 48000,
         numChannels: 1,
       ),
-      path: '',
+      path: path,
     );
   }
 
