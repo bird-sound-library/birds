@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -157,7 +156,7 @@ class _RecordingPageState extends State<RecordingPage> {
               Icon(
                 isRecording ? Icons.mic : Icons.mic_none,
                 size: 90,
-                color: isRecording ? Colors.red : null,
+                color: isRecording ? Theme.of(context).colorScheme.error : null,
               ),
 
               const SizedBox(height: 20),
@@ -203,7 +202,9 @@ class _RecordingPageState extends State<RecordingPage> {
                 Text(
                   resultMessage!,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.green),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
 
@@ -212,7 +213,9 @@ class _RecordingPageState extends State<RecordingPage> {
                 Text(
                   errorMessage!,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.red),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
                 ),
               ],
             ],

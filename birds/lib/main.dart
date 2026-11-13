@@ -4,6 +4,7 @@ import 'models/bird.dart';
 import 'services/bird_api.dart';
 import 'screens/bird_details_page.dart';
 import 'screens/recording_page.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const BirdsApp());
@@ -14,15 +15,17 @@ class BirdsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bird Library',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
-        ),
-        useMaterial3: true,
-      ),
-      home: const BirdsPage(),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeModeNotifier,
+      builder: (context, themeMode, _) {
+        return MaterialApp(
+          title: 'Bird Library',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeMode,
+          home: const BirdsPage(),
+        );
+      },
     );
   }
 }
@@ -57,6 +60,15 @@ class _BirdsPageState extends State<BirdsPage> {
       appBar: AppBar(
         title: const Text('Bird Library'),
         actions: [
+          IconButton(
+            onPressed: () => toggleTheme(context),
+            icon: Icon(
+              Theme.of(context).brightness == Brightness.dark
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+            ),
+            tooltip: 'Toggle theme',
+          ),
           IconButton(
             onPressed: reloadBirds,
             icon: const Icon(Icons.refresh),

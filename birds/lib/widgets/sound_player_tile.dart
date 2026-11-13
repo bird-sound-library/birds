@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -24,12 +23,39 @@ class _SoundPlayerTileState extends State<SoundPlayerTile> {
   late final AudioPlayer player;
 
   bool loading = false;
+  bool looping = true;
   String? error;
+
+  StreamSubscription<ProcessingState>? _completedSub;
 
   @override
   void initState() {
     super.initState();
     player = AudioPlayer();
+
+    // Fallback loop: if the platform ignores LoopMode, restart manually
+    // when the track finishes.
+    _completedSub = player.processingStateStream.listen((state) async {
+      if (state == ProcessingState.completed && looping) {
+        await player.seek(Duration.zero);
+        await player.play();
+      }
+    });
+
+    _applyLoopMode();
+  }
+
+  Future<void> _applyLoopMode() async {
+    try {
+      await player.setLoopMode(looping ? LoopMode.one : LoopMode.off);
+    } catch (_) {
+      // Not supported on this platform - the fallback above handles it.
+    }
+  }
+
+  void toggleLooping() {
+    setState(() => looping = !looping);
+    _applyLoopMode();
   }
 
   Future<void> togglePlayback() async {
@@ -130,6 +156,7 @@ class _SoundPlayerTileState extends State<SoundPlayerTile> {
       activePlayer = null;
     }
 
+    _completedSub?.cancel();
     player.dispose();
     super.dispose();
   }
@@ -188,6 +215,13 @@ class _SoundPlayerTileState extends State<SoundPlayerTile> {
                       ),
                     ],
                   ),
+                ),
+                IconButton(
+                  onPressed: toggleLooping,
+                  isSelected: looping,
+                  icon: const Icon(Icons.repeat),
+                  selectedIcon: const Icon(Icons.repeat_on),
+                  tooltip: looping ? 'Loop: on' : 'Loop: off',
                 ),
               ],
             ),
@@ -266,7 +300,9 @@ class _SoundPlayerTileState extends State<SoundPlayerTile> {
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   error!,
-                  style: const TextStyle(color: Colors.red),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
                 ),
               ),
           ],
