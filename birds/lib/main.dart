@@ -14,6 +14,7 @@ Future<void> main() async {
   await AuthService.instance.initialize();
 
   runApp(const BirdsApp());
+  return null;
 }
 
 class BirdsApp extends StatelessWidget {

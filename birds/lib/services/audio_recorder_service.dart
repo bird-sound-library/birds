@@ -1,6 +1,4 @@
 
-import 'dart:io';
-
 import 'package:record/record.dart';
 
 class AudioRecorderService {
@@ -21,18 +19,13 @@ class AudioRecorderService {
       throw Exception('Microphone permission denied');
     }
 
-    final directory = Directory.systemTemp;
-    final path =
-        '${directory.path}${Platform.pathSeparator}'
-        'bird_${DateTime.now().millisecondsSinceEpoch}.wav';
-
     await _recorder.start(
       const RecordConfig(
         encoder: AudioEncoder.wav,
         sampleRate: 48000,
         numChannels: 1,
       ),
-      path: path,
+      path: '',
     );
   }
 

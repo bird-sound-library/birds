@@ -201,3 +201,4 @@ birdnet-lab/Include
 birdnet-lab/Scripts
 birdnet-lab/share
 birdnet-lab/pyvenv.cfg
+.vscode/settings.json
