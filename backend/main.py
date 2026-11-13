@@ -1,26 +1,31 @@
+
 import uuid
 import logging
 from pathlib import Path
 from datetime import datetime, timezone
-from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Form, status
+from decimal import Decimal
+
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, func
 from sqlalchemy.orm import Session, selectinload
+from mutagen import File as MutagenFile
 
 from database import get_db
 from models import Bird, Recording, User
 from schemas import BirdResponse, SoundResponse, RecordingResponse
-from decimal import Decimal
-from mutagen import File as MutagenFile
 from routers.auth import router as auth_router
-from dependencies import get_current_user
+from dependencies import get_current_user, get_optional_user
 from settings import settings
-from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 app.include_router(auth_router)
+
 UPLOAD_DIR = Path(__file__).resolve().parent / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
 logger = logging.getLogger(__name__)
 
 app.mount(
@@ -30,14 +35,15 @@ app.mount(
 )
 
 
+# CORS settings
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 
 @app.get("/test-db")
@@ -65,7 +71,6 @@ def get_birds(db: Session = Depends(get_db)):
 
 @app.get("/birds/{bird_id}", response_model=BirdResponse)
 def get_bird(bird_id: int, db: Session = Depends(get_db)):
-
     bird = (
         db.query(Bird)
         .options(
@@ -83,6 +88,7 @@ def get_bird(bird_id: int, db: Session = Depends(get_db)):
         )
 
     return bird
+
 
 @app.get(
     "/birds/{bird_id}/sounds",
@@ -119,6 +125,7 @@ ALLOWED_EXTENSIONS = {
 
 MAX_FILE_SIZE = 25 * 1024 * 1024
 
+
 def get_audio_duration(file_path: Path) -> Decimal:
     audio = MutagenFile(file_path)
 
@@ -142,7 +149,7 @@ async def upload_recording(
     file: UploadFile = File(...),
     location: str | None = Form(None),
     db: Session = Depends(get_db),
-    user: User = Depends(get_current_user)
+    user: User | None = Depends(get_optional_user)
 ):
     extension = Path(file.filename or "").suffix.lower()
 
@@ -160,41 +167,40 @@ async def upload_recording(
     committed = False
 
     try:
-        # Lock user row to prevent concurrent uploads
-        locked_user = db.scalar(
-            select(User)
-            .where(User.user_id == user.user_id)
-            .with_for_update()
-        )
-
-        if locked_user is None or not locked_user.is_active:
-            raise HTTPException(
-                status_code=401,
-                detail="User is unavailable"
-            )
-
-        # Count user's recordings
-        recordings_count = db.scalar(
-            select(func.count())
-            .select_from(Recording)
-            .where(Recording.user_id == user.user_id)
-        )
-
         oldest_recording = None
 
-        # Find oldest recording if limit reached
-        if recordings_count >= 100:
-            oldest_recording = db.scalar(
-                select(Recording)
-                .where(Recording.user_id == user.user_id)
-                .order_by(
-                    Recording.recorded_at.asc(),
-                    Recording.recording_id.asc()
-                )
-                .limit(1)
+        # Limit and lock apply only to authenticated users
+        if user is not None:
+            locked_user = db.scalar(
+                select(User)
+                .where(User.user_id == user.user_id)
+                .with_for_update()
             )
 
-        # Save new audio file
+            if locked_user is None or not locked_user.is_active:
+                raise HTTPException(
+                    status_code=401,
+                    detail="User is unavailable"
+                )
+
+            recordings_count = db.scalar(
+                select(func.count())
+                .select_from(Recording)
+                .where(Recording.user_id == user.user_id)
+            )
+
+            if recordings_count >= 100:
+                oldest_recording = db.scalar(
+                    select(Recording)
+                    .where(Recording.user_id == user.user_id)
+                    .order_by(
+                        Recording.recorded_at.asc(),
+                        Recording.recording_id.asc()
+                    )
+                    .limit(1)
+                )
+
+        # Save audio file
         with file_path.open("wb") as output:
             while True:
                 chunk = await file.read(1024 * 1024)
@@ -221,9 +227,9 @@ async def upload_recording(
                 detail=str(exc)
             )
 
-        # Create new recording
+        # Create recording (user_id = None for guests)
         recording = Recording(
-            user_id=user.user_id,
+            user_id=user.user_id if user is not None else None,
             file_url=f"/uploads/{filename}",
             recorded_at=datetime.now(timezone.utc).replace(tzinfo=None),
             location=location,
@@ -234,12 +240,10 @@ async def upload_recording(
 
         db.add(recording)
 
-        # Delete oldest database record if needed
         if oldest_recording is not None:
             old_file_path = (
                 UPLOAD_DIR / Path(oldest_recording.file_url).name
             )
-
             db.delete(oldest_recording)
 
         db.commit()
@@ -247,7 +251,6 @@ async def upload_recording(
 
         db.refresh(recording)
 
-        # Remove old file only after successful commit
         if old_file_path is not None:
             old_file_path.unlink(missing_ok=True)
 
@@ -264,7 +267,6 @@ async def upload_recording(
 
     finally:
         await file.close()
-
 
 
 @app.get(
@@ -289,6 +291,7 @@ def get_recordings(
     ).all()
 
     return recordings
+
 
 @app.get(
     "/recordings/{recording_id}",

@@ -367,9 +367,10 @@ class Recording(Base):
         primary_key=True
     )
 
-    user_id: Mapped[int] = mapped_column(
+    # nullable=True: записи без регистрации (аноним) хранятся с user_id = NULL
+    user_id: Mapped[int | None] = mapped_column(
         ForeignKey("users.user_id", ondelete="CASCADE"),
-        nullable=False,
+        nullable=True,
         index=True
     )
 
@@ -403,11 +404,12 @@ class Recording(Base):
         nullable=True
     )
 
-    # Identification results
-    user: Mapped["User"] = relationship(
+    # Owner (None for anonymous recordings)
+    user: Mapped["User | None"] = relationship(
         back_populates="recordings"
     )
 
+    # Identification results
     identifications: Mapped[list["IdentifiedAs"]] = relationship(
         back_populates="recording",
         cascade="all, delete-orphan",

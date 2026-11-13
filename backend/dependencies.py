@@ -1,4 +1,3 @@
-
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
@@ -8,6 +7,7 @@ from models import User
 from security import decode_token
 
 bearer_scheme = HTTPBearer()
+optional_bearer = HTTPBearer(auto_error=False)
 
 
 def get_current_user(
@@ -42,3 +42,17 @@ def get_current_user(
         )
 
     return user
+
+
+def get_optional_user(
+    credentials: HTTPAuthorizationCredentials | None = Depends(optional_bearer),
+    db: Session = Depends(get_db)
+) -> User | None:
+    """
+    Без токена -> None (аноним).
+    Токен передан, но плохой или истёк -> 401 (клиент должен сделать refresh).
+    """
+    if credentials is None:
+        return None
+
+    return get_current_user(credentials, db)
