@@ -1,0 +1,93 @@
+{
+    "status": "completed",
+    "duration": 51.96875,
+    "species": [
+        {
+            "scientific_name": "Cyanistes caeruleus",
+            "common_name": "Eurasian Blue Tit",
+            "detections": 12,
+            "max_confidence": 0.9419,
+            "avg_confidence": 0.8951,
+            "first_seen": 6.0,
+            "last_seen": 51.0,
+            "intervals": [
+                {
+                    "start": 6.0,
+                    "end": 15.0
+                },
+                {
+                    "start": 21.0,
+                    "end": 51.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Aegithalos caudatus",
+            "common_name": "Long-tailed Tit",
+            "detections": 3,
+            "max_confidence": 0.8344,
+            "avg_confidence": 0.7043,
+            "first_seen": 15.0,
+            "last_seen": 45.0,
+            "intervals": [
+                {
+                    "start": 15.0,
+                    "end": 18.0
+                },
+                {
+                    "start": 39.0,
+                    "end": 45.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Erithacus rubecula",
+            "common_name": "European Robin",
+            "detections": 1,
+            "max_confidence": 0.8254,
+            "avg_confidence": 0.8254,
+            "first_seen": 3.0,
+            "last_seen": 6.0,
+            "intervals": [
+                {
+                    "start": 3.0,
+                    "end": 6.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Selasphorus platycercus",
+            "common_name": "Broad-tailed Hummingbird",
+            "detections": 1,
+            "max_confidence": 0.6507,
+            "avg_confidence": 0.6507,
+            "first_seen": 36.0,
+            "last_seen": 39.0,
+            "intervals": [
+                {
+                    "start": 36.0,
+                    "end": 39.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Fringilla coelebs",
+            "common_name": "Eurasian Chaffinch",
+            "detections": 3,
+            "max_confidence": 0.6162,
+            "avg_confidence": 0.5551,
+            "first_seen": 18.0,
+            "last_seen": 33.0,
+            "intervals": [
+                {
+                    "start": 18.0,
+                    "end": 21.0
+                },
+                {
+                    "start": 27.0,
+                    "end": 33.0
+                }
+            ]
+        }
+    ]
+}

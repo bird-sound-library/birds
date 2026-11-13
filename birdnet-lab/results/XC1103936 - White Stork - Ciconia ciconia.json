@@ -1,0 +1,36 @@
+{
+    "status": "completed",
+    "duration": 13.0625,
+    "species": [
+        {
+            "scientific_name": "Ciconia ciconia",
+            "common_name": "White Stork",
+            "detections": 3,
+            "max_confidence": 0.9257,
+            "avg_confidence": 0.8987,
+            "first_seen": 3.0,
+            "last_seen": 12.0,
+            "intervals": [
+                {
+                    "start": 3.0,
+                    "end": 12.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Phylloscopus collybita",
+            "common_name": "Common Chiffchaff",
+            "detections": 1,
+            "max_confidence": 0.5314,
+            "avg_confidence": 0.5314,
+            "first_seen": 0.0,
+            "last_seen": 3.0,
+            "intervals": [
+                {
+                    "start": 0.0,
+                    "end": 3.0
+                }
+            ]
+        }
+    ]
+}

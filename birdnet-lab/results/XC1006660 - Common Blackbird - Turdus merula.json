@@ -1,0 +1,40 @@
+{
+    "status": "completed",
+    "duration": 57.65625,
+    "species": [
+        {
+            "scientific_name": "Apus apus",
+            "common_name": "Common Swift",
+            "detections": 5,
+            "max_confidence": 0.947,
+            "avg_confidence": 0.8252,
+            "first_seen": 3.0,
+            "last_seen": 39.0,
+            "intervals": [
+                {
+                    "start": 3.0,
+                    "end": 9.0
+                },
+                {
+                    "start": 27.0,
+                    "end": 39.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Passer domesticus",
+            "common_name": "House Sparrow",
+            "detections": 2,
+            "max_confidence": 0.6365,
+            "avg_confidence": 0.6026,
+            "first_seen": 48.0,
+            "last_seen": 57.0,
+            "intervals": [
+                {
+                    "start": 48.0,
+                    "end": 57.0
+                }
+            ]
+        }
+    ]
+}

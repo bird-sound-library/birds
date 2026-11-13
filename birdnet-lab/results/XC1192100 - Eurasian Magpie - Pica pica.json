@@ -1,0 +1,89 @@
+{
+    "status": "completed",
+    "duration": 133.125,
+    "species": [
+        {
+            "scientific_name": "Pica pica",
+            "common_name": "Eurasian Magpie",
+            "detections": 34,
+            "max_confidence": 0.9565,
+            "avg_confidence": 0.8641,
+            "first_seen": 0.0,
+            "last_seen": 132.0,
+            "intervals": [
+                {
+                    "start": 0.0,
+                    "end": 18.0
+                },
+                {
+                    "start": 30.0,
+                    "end": 69.0
+                },
+                {
+                    "start": 75.0,
+                    "end": 132.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Certhia brachydactyla",
+            "common_name": "Short-toed Treecreeper",
+            "detections": 1,
+            "max_confidence": 0.8007,
+            "avg_confidence": 0.8007,
+            "first_seen": 87.0,
+            "last_seen": 90.0,
+            "intervals": [
+                {
+                    "start": 87.0,
+                    "end": 90.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Elanus caeruleus",
+            "common_name": "Black-winged Kite",
+            "detections": 1,
+            "max_confidence": 0.8002,
+            "avg_confidence": 0.8002,
+            "first_seen": 27.0,
+            "last_seen": 30.0,
+            "intervals": [
+                {
+                    "start": 27.0,
+                    "end": 30.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Garrulus glandarius",
+            "common_name": "Eurasian Jay",
+            "detections": 1,
+            "max_confidence": 0.5629,
+            "avg_confidence": 0.5629,
+            "first_seen": 111.0,
+            "last_seen": 114.0,
+            "intervals": [
+                {
+                    "start": 111.0,
+                    "end": 114.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Gallus gallus",
+            "common_name": "Red Junglefowl",
+            "detections": 1,
+            "max_confidence": 0.5168,
+            "avg_confidence": 0.5168,
+            "first_seen": 15.0,
+            "last_seen": 18.0,
+            "intervals": [
+                {
+                    "start": 15.0,
+                    "end": 18.0
+                }
+            ]
+        }
+    ]
+}

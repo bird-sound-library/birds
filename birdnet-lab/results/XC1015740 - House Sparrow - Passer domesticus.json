@@ -1,0 +1,211 @@
+{
+    "status": "completed",
+    "duration": 236.125,
+    "species": [
+        {
+            "scientific_name": "Streptopelia decaocto",
+            "common_name": "Eurasian Collared Dove",
+            "detections": 9,
+            "max_confidence": 0.9314,
+            "avg_confidence": 0.7268,
+            "first_seen": 0.0,
+            "last_seen": 177.0,
+            "intervals": [
+                {
+                    "start": 0.0,
+                    "end": 9.0
+                },
+                {
+                    "start": 57.0,
+                    "end": 60.0
+                },
+                {
+                    "start": 87.0,
+                    "end": 93.0
+                },
+                {
+                    "start": 99.0,
+                    "end": 105.0
+                },
+                {
+                    "start": 174.0,
+                    "end": 177.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Carduelis carduelis",
+            "common_name": "European Goldfinch",
+            "detections": 19,
+            "max_confidence": 0.9148,
+            "avg_confidence": 0.7386,
+            "first_seen": 3.0,
+            "last_seen": 234.0,
+            "intervals": [
+                {
+                    "start": 3.0,
+                    "end": 6.0
+                },
+                {
+                    "start": 12.0,
+                    "end": 21.0
+                },
+                {
+                    "start": 30.0,
+                    "end": 39.0
+                },
+                {
+                    "start": 114.0,
+                    "end": 117.0
+                },
+                {
+                    "start": 186.0,
+                    "end": 207.0
+                },
+                {
+                    "start": 219.0,
+                    "end": 234.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Cicada orni",
+            "common_name": "Ash Cicada",
+            "detections": 40,
+            "max_confidence": 0.8696,
+            "avg_confidence": 0.6985,
+            "first_seen": 9.0,
+            "last_seen": 195.0,
+            "intervals": [
+                {
+                    "start": 9.0,
+                    "end": 27.0
+                },
+                {
+                    "start": 33.0,
+                    "end": 132.0
+                },
+                {
+                    "start": 138.0,
+                    "end": 141.0
+                },
+                {
+                    "start": 150.0,
+                    "end": 156.0
+                },
+                {
+                    "start": 165.0,
+                    "end": 168.0
+                },
+                {
+                    "start": 174.0,
+                    "end": 183.0
+                },
+                {
+                    "start": 192.0,
+                    "end": 195.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Passer domesticus",
+            "common_name": "House Sparrow",
+            "detections": 16,
+            "max_confidence": 0.7315,
+            "avg_confidence": 0.5825,
+            "first_seen": 0.0,
+            "last_seen": 216.0,
+            "intervals": [
+                {
+                    "start": 0.0,
+                    "end": 9.0
+                },
+                {
+                    "start": 33.0,
+                    "end": 39.0
+                },
+                {
+                    "start": 45.0,
+                    "end": 57.0
+                },
+                {
+                    "start": 63.0,
+                    "end": 75.0
+                },
+                {
+                    "start": 102.0,
+                    "end": 105.0
+                },
+                {
+                    "start": 132.0,
+                    "end": 135.0
+                },
+                {
+                    "start": 153.0,
+                    "end": 156.0
+                },
+                {
+                    "start": 210.0,
+                    "end": 216.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Sturnus vulgaris",
+            "common_name": "Common Starling",
+            "detections": 7,
+            "max_confidence": 0.6139,
+            "avg_confidence": 0.5513,
+            "first_seen": 135.0,
+            "last_seen": 225.0,
+            "intervals": [
+                {
+                    "start": 135.0,
+                    "end": 144.0
+                },
+                {
+                    "start": 156.0,
+                    "end": 162.0
+                },
+                {
+                    "start": 171.0,
+                    "end": 174.0
+                },
+                {
+                    "start": 216.0,
+                    "end": 225.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Catharus minimus",
+            "common_name": "Grey-cheeked Thrush",
+            "detections": 1,
+            "max_confidence": 0.5729,
+            "avg_confidence": 0.5729,
+            "first_seen": 24.0,
+            "last_seen": 27.0,
+            "intervals": [
+                {
+                    "start": 24.0,
+                    "end": 27.0
+                }
+            ]
+        },
+        {
+            "scientific_name": "Spizella pallida",
+            "common_name": "Clay-colored Sparrow",
+            "detections": 1,
+            "max_confidence": 0.5618,
+            "avg_confidence": 0.5618,
+            "first_seen": 3.0,
+            "last_seen": 6.0,
+            "intervals": [
+                {
+                    "start": 3.0,
+                    "end": 6.0
+                }
+            ]
+        }
+    ]
+}

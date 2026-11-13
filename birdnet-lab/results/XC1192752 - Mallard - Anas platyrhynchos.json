@@ -1,0 +1,21 @@
+{
+    "status": "completed",
+    "duration": 9.8984375,
+    "species": [
+        {
+            "scientific_name": "Anas platyrhynchos",
+            "common_name": "Mallard",
+            "detections": 3,
+            "max_confidence": 0.9178,
+            "avg_confidence": 0.7714,
+            "first_seen": 0.0,
+            "last_seen": 9.0,
+            "intervals": [
+                {
+                    "start": 0.0,
+                    "end": 9.0
+                }
+            ]
+        }
+    ]
+}

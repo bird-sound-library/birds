@@ -195,3 +195,9 @@ birds/.flutter-plugins-dependencies
 backups/
 backend/.env
 backend/.env
+birdnet-lab/Lib
+birdnet-lab/__pycache__
+birdnet-lab/Include
+birdnet-lab/Scripts
+birdnet-lab/share
+birdnet-lab/pyvenv.cfg

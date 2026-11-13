@@ -1,0 +1,8 @@
+species_name,detections,max_confidence,avg_confidence,first_seen,last_seen
+Streptopelia decaocto_Eurasian Collared Dove,9,93.14132,72.68452,0.0,177.0
+Carduelis carduelis_European Goldfinch,19,91.47612,73.86302,3.0,234.0
+Cicada orni_Ash Cicada,40,86.95801,69.85486,9.0,195.0
+Passer domesticus_House Sparrow,16,73.14506,58.25295,0.0,216.0
+Sturnus vulgaris_Common Starling,7,61.38701,55.129337,135.0,225.0
+Catharus minimus_Grey-cheeked Thrush,1,57.28997,57.28997,24.0,27.0
+Spizella pallida_Clay-colored Sparrow,1,56.17718,56.17718,3.0,6.0

@@ -1,0 +1,223 @@
+input,start_time,end_time,species_name,confidence
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,0.0,3.0,Streptopelia decaocto_Eurasian Collared Dove,0.92272955
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,0.0,3.0,Passer domesticus_House Sparrow,0.5663766
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,0.0,3.0,Spizella pusilla_Field Sparrow,0.11794342
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,3.0,6.0,Streptopelia decaocto_Eurasian Collared Dove,0.9314132
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,3.0,6.0,Carduelis carduelis_European Goldfinch,0.66293204
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,3.0,6.0,Spizella pallida_Clay-colored Sparrow,0.5617718
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,3.0,6.0,Passer domesticus_House Sparrow,0.3776179
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,3.0,6.0,Chloris chloris_European Greenfinch,0.24251622
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,6.0,9.0,Streptopelia decaocto_Eurasian Collared Dove,0.9250029
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,6.0,9.0,Passer domesticus_House Sparrow,0.50139
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,6.0,9.0,Spizella pallida_Clay-colored Sparrow,0.20339759
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,6.0,9.0,Sturnus vulgaris_Common Starling,0.17458344
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,9.0,12.0,Cicada orni_Ash Cicada,0.6509396
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,9.0,12.0,Carduelis carduelis_European Goldfinch,0.39039123
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,9.0,12.0,Streptopelia decaocto_Eurasian Collared Dove,0.15454717
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,12.0,15.0,Cicada orni_Ash Cicada,0.71088064
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,12.0,15.0,Carduelis carduelis_European Goldfinch,0.61902595
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,15.0,18.0,Carduelis carduelis_European Goldfinch,0.7249944
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,15.0,18.0,Cicada orni_Ash Cicada,0.55245775
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,18.0,21.0,Carduelis carduelis_European Goldfinch,0.79233474
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,18.0,21.0,Cicada orni_Ash Cicada,0.5994905
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,18.0,21.0,Passer domesticus_House Sparrow,0.13323933
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,18.0,21.0,Linaria cannabina_Common Linnet,0.10928091
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,21.0,24.0,Cicada orni_Ash Cicada,0.77333844
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,21.0,24.0,Carduelis carduelis_European Goldfinch,0.421096
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,24.0,27.0,Cicada orni_Ash Cicada,0.8093918
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,24.0,27.0,Catharus minimus_Grey-cheeked Thrush,0.5728997
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,24.0,27.0,Passer domesticus_House Sparrow,0.34532884
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,27.0,30.0,Cicada orni_Ash Cicada,0.38643613
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,27.0,30.0,Passer domesticus_House Sparrow,0.33560234
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,27.0,30.0,Chloris chloris_European Greenfinch,0.18644418
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,27.0,30.0,Columba livia_Rock Dove,0.13540918
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,27.0,30.0,Patagioenas fasciata_Band-tailed Pigeon,0.12312379
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,30.0,33.0,Carduelis carduelis_European Goldfinch,0.69889295
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,30.0,33.0,Passer domesticus_House Sparrow,0.4052077
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,30.0,33.0,Columba livia_Rock Dove,0.36502686
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,30.0,33.0,Cicada orni_Ash Cicada,0.36402538
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,33.0,36.0,Passer domesticus_House Sparrow,0.6563421
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,33.0,36.0,Cicada orni_Ash Cicada,0.59821564
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,36.0,39.0,Carduelis carduelis_European Goldfinch,0.58810955
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,36.0,39.0,Passer domesticus_House Sparrow,0.5601041
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,36.0,39.0,Cicada orni_Ash Cicada,0.27148324
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,39.0,42.0,Cicada orni_Ash Cicada,0.7945496
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,39.0,42.0,Passer domesticus_House Sparrow,0.46123832
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,39.0,42.0,Streptopelia decaocto_Eurasian Collared Dove,0.1730604
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,42.0,45.0,Cicada orni_Ash Cicada,0.42462757
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,42.0,45.0,Carduelis carduelis_European Goldfinch,0.3559611
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,42.0,45.0,Passer domesticus_House Sparrow,0.30336672
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,42.0,45.0,Regulus ignicapilla_Common Firecrest,0.28224787
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,42.0,45.0,Streptopelia decaocto_Eurasian Collared Dove,0.10418226
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,45.0,48.0,Cicada orni_Ash Cicada,0.65325963
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,45.0,48.0,Passer domesticus_House Sparrow,0.5974758
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,48.0,51.0,Cicada orni_Ash Cicada,0.66392356
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,48.0,51.0,Passer domesticus_House Sparrow,0.3912352
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,48.0,51.0,Streptopelia decaocto_Eurasian Collared Dove,0.21027978
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,51.0,54.0,Cicada orni_Ash Cicada,0.86921024
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,51.0,54.0,Passer domesticus_House Sparrow,0.65919185
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,54.0,57.0,Passer domesticus_House Sparrow,0.73145056
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,54.0,57.0,Cicada orni_Ash Cicada,0.60459507
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,54.0,57.0,Streptopelia decaocto_Eurasian Collared Dove,0.25028524
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,57.0,60.0,Streptopelia decaocto_Eurasian Collared Dove,0.53228295
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,57.0,60.0,Passer domesticus_House Sparrow,0.44705838
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,57.0,60.0,Cicada orni_Ash Cicada,0.41682747
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,60.0,63.0,Cicada orni_Ash Cicada,0.68863165
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,60.0,63.0,Passer domesticus_House Sparrow,0.4789851
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,63.0,66.0,Cicada orni_Ash Cicada,0.6367599
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,63.0,66.0,Passer domesticus_House Sparrow,0.5297389
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,66.0,69.0,Cicada orni_Ash Cicada,0.5794055
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,66.0,69.0,Passer domesticus_House Sparrow,0.57604074
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,69.0,72.0,Passer domesticus_House Sparrow,0.5254972
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,69.0,72.0,Cicada orni_Ash Cicada,0.5079517
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,69.0,72.0,Carduelis carduelis_European Goldfinch,0.12538773
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,72.0,75.0,Cicada orni_Ash Cicada,0.6742702
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,72.0,75.0,Passer domesticus_House Sparrow,0.6554701
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,75.0,78.0,Cicada orni_Ash Cicada,0.8695801
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,75.0,78.0,Passer domesticus_House Sparrow,0.46130508
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,78.0,81.0,Cicada orni_Ash Cicada,0.864647
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,78.0,81.0,Passer domesticus_House Sparrow,0.3306873
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,78.0,81.0,Carduelis carduelis_European Goldfinch,0.18579212
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,81.0,84.0,Cicada orni_Ash Cicada,0.5966324
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,81.0,84.0,Passer domesticus_House Sparrow,0.4381718
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,84.0,87.0,Cicada orni_Ash Cicada,0.77816814
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,84.0,87.0,Passer domesticus_House Sparrow,0.43924934
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,84.0,87.0,Carduelis carduelis_European Goldfinch,0.4317352
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,87.0,90.0,Streptopelia decaocto_Eurasian Collared Dove,0.80838865
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,87.0,90.0,Cicada orni_Ash Cicada,0.712799
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,87.0,90.0,Passer domesticus_House Sparrow,0.26969266
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,87.0,90.0,Carduelis carduelis_European Goldfinch,0.2370722
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,90.0,93.0,Streptopelia decaocto_Eurasian Collared Dove,0.72620344
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,90.0,93.0,Cicada orni_Ash Cicada,0.43810388
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,90.0,93.0,Passer domesticus_House Sparrow,0.34653386
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,93.0,96.0,Cicada orni_Ash Cicada,0.75080246
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,93.0,96.0,Passer domesticus_House Sparrow,0.391549
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,96.0,99.0,Cicada orni_Ash Cicada,0.49264956
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,96.0,99.0,Passer domesticus_House Sparrow,0.35811594
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,96.0,99.0,Streptopelia decaocto_Eurasian Collared Dove,0.27907017
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,99.0,102.0,Cicada orni_Ash Cicada,0.6322513
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,99.0,102.0,Streptopelia decaocto_Eurasian Collared Dove,0.6060736
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,99.0,102.0,Passer domesticus_House Sparrow,0.29921
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,102.0,105.0,Streptopelia decaocto_Eurasian Collared Dove,0.5793222
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,102.0,105.0,Passer domesticus_House Sparrow,0.5233519
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,102.0,105.0,Cicada orni_Ash Cicada,0.49309385
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,105.0,108.0,Cicada orni_Ash Cicada,0.69647175
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,105.0,108.0,Passer domesticus_House Sparrow,0.4768991
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,105.0,108.0,Streptopelia decaocto_Eurasian Collared Dove,0.39964017
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,108.0,111.0,Cicada orni_Ash Cicada,0.73489106
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,108.0,111.0,Passer domesticus_House Sparrow,0.32783598
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,108.0,111.0,Streptopelia decaocto_Eurasian Collared Dove,0.2057881
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,111.0,114.0,Cicada orni_Ash Cicada,0.5958334
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,111.0,114.0,Passer domesticus_House Sparrow,0.31224975
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,111.0,114.0,Streptopelia decaocto_Eurasian Collared Dove,0.30136737
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,114.0,117.0,Carduelis carduelis_European Goldfinch,0.60165834
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,114.0,117.0,Cicada orni_Ash Cicada,0.43166563
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,114.0,117.0,Passer domesticus_House Sparrow,0.37027937
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,117.0,120.0,Cicada orni_Ash Cicada,0.7703535
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,117.0,120.0,Passer domesticus_House Sparrow,0.32044947
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,120.0,123.0,Cicada orni_Ash Cicada,0.6455521
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,120.0,123.0,Passer domesticus_House Sparrow,0.29556537
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,123.0,126.0,Cicada orni_Ash Cicada,0.7328566
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,123.0,126.0,Passer domesticus_House Sparrow,0.45535204
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,123.0,126.0,Streptopelia decaocto_Eurasian Collared Dove,0.24859025
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,123.0,126.0,Fringilla coelebs_Eurasian Chaffinch,0.1594431
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,126.0,129.0,Cicada orni_Ash Cicada,0.7614146
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,126.0,129.0,Passer domesticus_House Sparrow,0.27856797
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,129.0,132.0,Cicada orni_Ash Cicada,0.6909473
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,129.0,132.0,Passer domesticus_House Sparrow,0.27725837
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,129.0,132.0,Columba oenas_Stock Dove,0.15587835
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,132.0,135.0,Passer domesticus_House Sparrow,0.5140269
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,132.0,135.0,Cicada orni_Ash Cicada,0.27850664
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,132.0,135.0,Sturnus vulgaris_Common Starling,0.2707232
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,135.0,138.0,Sturnus vulgaris_Common Starling,0.57830244
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,135.0,138.0,Streptopelia decaocto_Eurasian Collared Dove,0.36668664
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,135.0,138.0,Cicada orni_Ash Cicada,0.18588254
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,138.0,141.0,Cicada orni_Ash Cicada,0.5529836
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,138.0,141.0,Passer domesticus_House Sparrow,0.1928545
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,138.0,141.0,Streptopelia decaocto_Eurasian Collared Dove,0.12054587
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,138.0,141.0,Sturnus vulgaris_Common Starling,0.10871997
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,141.0,144.0,Sturnus vulgaris_Common Starling,0.52513707
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,141.0,144.0,Streptopelia decaocto_Eurasian Collared Dove,0.21574154
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,141.0,144.0,Cicada orni_Ash Cicada,0.15563989
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,144.0,147.0,Sturnus vulgaris_Common Starling,0.2619078
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,144.0,147.0,Cicada orni_Ash Cicada,0.17262314
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,144.0,147.0,Passer domesticus_House Sparrow,0.10789502
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,144.0,147.0,Sturnus unicolor_Spotless Starling,0.10298574
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,147.0,150.0,Sturnus vulgaris_Common Starling,0.3307097
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,147.0,150.0,Streptopelia decaocto_Eurasian Collared Dove,0.324656
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,147.0,150.0,Passer domesticus_House Sparrow,0.3134985
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,147.0,150.0,Cicada orni_Ash Cicada,0.3064521
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,150.0,153.0,Cicada orni_Ash Cicada,0.8245216
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,150.0,153.0,Passer domesticus_House Sparrow,0.3281355
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,150.0,153.0,Sturnus vulgaris_Common Starling,0.101230495
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,153.0,156.0,Cicada orni_Ash Cicada,0.62189126
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,153.0,156.0,Passer domesticus_House Sparrow,0.5473
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,153.0,156.0,Anthus cervinus_Red-throated Pipit,0.22006631
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,156.0,159.0,Sturnus vulgaris_Common Starling,0.5540342
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,156.0,159.0,Cicada orni_Ash Cicada,0.29197806
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,159.0,162.0,Sturnus vulgaris_Common Starling,0.55496377
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,159.0,162.0,Streptopelia decaocto_Eurasian Collared Dove,0.21355626
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,159.0,162.0,Cicada orni_Ash Cicada,0.19471286
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,159.0,162.0,Passer domesticus_House Sparrow,0.15622519
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,162.0,165.0,Sturnus vulgaris_Common Starling,0.48065972
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,162.0,165.0,Streptopelia decaocto_Eurasian Collared Dove,0.43383956
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,162.0,165.0,Cicada orni_Ash Cicada,0.3918673
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,162.0,165.0,Passer domesticus_House Sparrow,0.20907497
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,165.0,168.0,Cicada orni_Ash Cicada,0.64752406
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,165.0,168.0,Sturnus vulgaris_Common Starling,0.44185004
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,168.0,171.0,Cicada orni_Ash Cicada,0.47936064
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,168.0,171.0,Sturnus vulgaris_Common Starling,0.4272676
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,168.0,171.0,Streptopelia decaocto_Eurasian Collared Dove,0.19204843
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,168.0,171.0,Passer domesticus_House Sparrow,0.11716759
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,171.0,174.0,Sturnus vulgaris_Common Starling,0.6138701
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,171.0,174.0,Streptopelia decaocto_Eurasian Collared Dove,0.31428164
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,171.0,174.0,Cicada orni_Ash Cicada,0.22571082
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,174.0,177.0,Cicada orni_Ash Cicada,0.7311993
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,174.0,177.0,Streptopelia decaocto_Eurasian Collared Dove,0.51019055
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,174.0,177.0,Passer domesticus_House Sparrow,0.2145805
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,177.0,180.0,Cicada orni_Ash Cicada,0.828069
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,177.0,180.0,Streptopelia decaocto_Eurasian Collared Dove,0.37351856
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,177.0,180.0,Passer domesticus_House Sparrow,0.33004737
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,180.0,183.0,Cicada orni_Ash Cicada,0.7872492
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,180.0,183.0,Streptopelia decaocto_Eurasian Collared Dove,0.40204978
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,180.0,183.0,Passer domesticus_House Sparrow,0.35418865
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,180.0,183.0,Carduelis carduelis_European Goldfinch,0.111718856
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,183.0,186.0,Cicada orni_Ash Cicada,0.4328612
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,183.0,186.0,Passer domesticus_House Sparrow,0.40661457
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,186.0,189.0,Carduelis carduelis_European Goldfinch,0.7220224
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,186.0,189.0,Cicada orni_Ash Cicada,0.43353856
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,186.0,189.0,Pica pica_Eurasian Magpie,0.21088777
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,189.0,192.0,Carduelis carduelis_European Goldfinch,0.77229166
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,189.0,192.0,Sturnus vulgaris_Common Starling,0.47660673
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,189.0,192.0,Cicada orni_Ash Cicada,0.46670938
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,192.0,195.0,Cicada orni_Ash Cicada,0.7480342
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,192.0,195.0,Carduelis carduelis_European Goldfinch,0.66954523
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,195.0,198.0,Carduelis carduelis_European Goldfinch,0.8593937
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,195.0,198.0,Passer domesticus_House Sparrow,0.17371197
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,198.0,201.0,Carduelis carduelis_European Goldfinch,0.8289366
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,198.0,201.0,Passer domesticus_House Sparrow,0.15841484
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,201.0,204.0,Carduelis carduelis_European Goldfinch,0.9147612
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,204.0,207.0,Carduelis carduelis_European Goldfinch,0.903177
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,204.0,207.0,Columba palumbus_Common Wood Pigeon,0.17248532
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,207.0,210.0,Passer domesticus_House Sparrow,0.49858245
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,207.0,210.0,Streptopelia decaocto_Eurasian Collared Dove,0.15989316
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,207.0,210.0,Carduelis carduelis_European Goldfinch,0.13882941
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,210.0,213.0,Passer domesticus_House Sparrow,0.65211093
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,210.0,213.0,Pica pica_Eurasian Magpie,0.33633327
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,210.0,213.0,Streptopelia decaocto_Eurasian Collared Dove,0.20376709
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,210.0,213.0,Carduelis carduelis_European Goldfinch,0.20000315
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,213.0,216.0,Passer domesticus_House Sparrow,0.5246038
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,213.0,216.0,Streptopelia decaocto_Eurasian Collared Dove,0.4290124
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,213.0,216.0,Delichon urbicum_Western House Martin,0.120796725
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,216.0,219.0,Sturnus vulgaris_Common Starling,0.5327336
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,216.0,219.0,Streptopelia decaocto_Eurasian Collared Dove,0.38071185
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,216.0,219.0,Carduelis carduelis_European Goldfinch,0.308706
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,216.0,219.0,Loxia curvirostra_Red Crossbill,0.27136055
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,219.0,222.0,Carduelis carduelis_European Goldfinch,0.9024071
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,222.0,225.0,Carduelis carduelis_European Goldfinch,0.80696404
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,222.0,225.0,Sturnus vulgaris_Common Starling,0.5000124
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,225.0,228.0,Carduelis carduelis_European Goldfinch,0.7139164
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,228.0,231.0,Carduelis carduelis_European Goldfinch,0.6046297
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,231.0,234.0,Carduelis carduelis_European Goldfinch,0.6479818
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,231.0,234.0,Passer domesticus_House Sparrow,0.40891907
+D:\Flutter\birds\birdnet-lab\test_audio\XC1015740 - House Sparrow - Passer domesticus.mp3,234.0,236.125,Passer domesticus_House Sparrow,0.40332824

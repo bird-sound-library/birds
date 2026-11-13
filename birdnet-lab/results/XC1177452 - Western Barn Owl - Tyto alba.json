@@ -1,0 +1,21 @@
+{
+    "status": "completed",
+    "duration": 6.0703125,
+    "species": [
+        {
+            "scientific_name": "Tyto alba",
+            "common_name": "Western Barn Owl",
+            "detections": 2,
+            "max_confidence": 0.9422,
+            "avg_confidence": 0.9418,
+            "first_seen": 0.0,
+            "last_seen": 6.0,
+            "intervals": [
+                {
+                    "start": 0.0,
+                    "end": 6.0
+                }
+            ]
+        }
+    ]
+}

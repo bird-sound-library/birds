@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/sound.dart';
+import 'auth_service.dart';
 
 import '../models/bird.dart';
+import '../config/api_config.dart';
 
 class BirdApi {
-  static const String baseUrl = 'http://127.0.0.1:8000';
+  static const String baseUrl = ApiConfig.baseUrl;
 
   Future<List<Bird>> getBirds() async {
   final response = await http
       .get(Uri.parse('$baseUrl/birds'))
       .timeout(const Duration(seconds: 15));
-
   if (response.statusCode != 200) {
     throw Exception(
       'Failed to load birds: HTTP ${response.statusCode}',
@@ -68,27 +69,52 @@ Future<List<Sound>> getBirdSounds(int birdId) async {
       .toList();
 }
 
+
 Future<Map<String, dynamic>> uploadRecording(
   String filePath, {
   String? location,
 }) async {
-  final uri = Uri.parse('$baseUrl/recordings');
+  final auth = AuthService.instance;
 
-  final request = http.MultipartRequest('POST', uri);
-
-  request.files.add(
-    await http.MultipartFile.fromPath('file', filePath),
-  );
-
-  if (location != null && location.isNotEmpty) {
-    request.fields['location'] = location;
+  if (auth.accessToken == null) {
+    throw Exception('Please sign in before uploading a recording');
   }
 
-  final streamedResponse = await request.send().timeout(
-    const Duration(seconds: 60),
-  );
+  Future<http.Response> sendUpload() async {
+    final request = http.MultipartRequest(
+      'POST',
+      Uri.parse('$baseUrl/recordings'),
+    );
 
-  final response = await http.Response.fromStream(streamedResponse);
+    request.headers['Authorization'] =
+        'Bearer ${auth.accessToken}';
+
+    request.files.add(
+      await http.MultipartFile.fromPath('file', filePath),
+    );
+
+    if (location != null && location.isNotEmpty) {
+      request.fields['location'] = location;
+    }
+
+    final streamedResponse = await request.send().timeout(
+      const Duration(seconds: 60),
+    );
+
+    return http.Response.fromStream(streamedResponse);
+  }
+
+  var response = await sendUpload();
+
+  if (response.statusCode == 401) {
+    final refreshed = await auth.refreshSession();
+
+    if (!refreshed) {
+      throw Exception('Session expired. Please sign in again.');
+    }
+
+    response = await sendUpload();
+  }
 
   if (response.statusCode != 201) {
     throw Exception(
@@ -98,6 +124,4 @@ Future<Map<String, dynamic>> uploadRecording(
 
   return jsonDecode(response.body) as Map<String, dynamic>;
 }
-
-
 }

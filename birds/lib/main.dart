@@ -5,8 +5,14 @@ import 'services/bird_api.dart';
 import 'screens/bird_details_page.dart';
 import 'screens/recording_page.dart';
 import 'theme.dart';
+import 'services/auth_service.dart';
+import 'screens/auth_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await AuthService.instance.initialize();
+
   runApp(const BirdsApp());
 }
 
@@ -54,6 +60,15 @@ class _BirdsPageState extends State<BirdsPage> {
     });
   }
 
+  void openRecordingPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const RecordingPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +89,53 @@ class _BirdsPageState extends State<BirdsPage> {
             icon: const Icon(Icons.refresh),
             tooltip: 'Refresh',
           ),
+          AnimatedBuilder(
+  animation: AuthService.instance,
+  builder: (context, _) {
+    final user = AuthService.instance.currentUser;
+
+    return IconButton(
+      tooltip: user == null ? 'Sign in' : 'Account',
+      icon: Icon(
+        user == null ? Icons.login : Icons.account_circle,
+      ),
+      onPressed: () async {
+        if (user == null) {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const AuthPage(),
+            ),
+          );
+        } else {
+          final shouldLogout = await showDialog<bool>(
+            context: context,
+            builder: (dialogContext) => AlertDialog(
+              title: const Text('Account'),
+              content: Text(user['email']?.toString() ?? ''),
+              actions: [
+                TextButton(
+                  onPressed: () =>
+                      Navigator.pop(dialogContext, false),
+                  child: const Text('Cancel'),
+                ),
+                FilledButton(
+                  onPressed: () =>
+                      Navigator.pop(dialogContext, true),
+                  child: const Text('Sign out'),
+                ),
+              ],
+            ),
+          );
+
+          if (shouldLogout == true) {
+            await AuthService.instance.logout();
+          }
+        }
+      },
+    );
+  },
+),
         ],
       ),
       body: FutureBuilder<List<Bird>>(
@@ -152,14 +214,7 @@ class _BirdsPageState extends State<BirdsPage> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => const RecordingPage(),
-            ),
-          );
-        },
+        onPressed: openRecordingPage,
         icon: const Icon(Icons.mic),
         label: const Text('Record bird'),
       ),
