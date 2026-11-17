@@ -1,6 +1,6 @@
+
 name: Release
 
-# Runs when a version tag is pushed (e.g. v1.0.0), or manually from the Actions tab.
 on:
   push:
     tags:
@@ -8,11 +8,13 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag (e.g. v1.0.0)"
+        description: "Release tag (e.g. v1.0.1)"
         required: true
 
 permissions:
-  contents: write # needed to create a release and upload files
+  contents: write
+  pages: write
+  id-token: write
 
 env:
   TAG: ${{ github.event.inputs.tag || github.ref_name }}
@@ -38,7 +40,6 @@ jobs:
       - name: Build Windows app
         run: flutter build windows --release
 
-      # The .exe needs the DLLs and the data folder next to it, so we zip the whole folder.
       - name: Zip build
         shell: pwsh
         run: Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath birds-windows-${{ env.TAG }}.zip
@@ -80,6 +81,47 @@ jobs:
         with:
           name: android
           path: birds/birds-android-${{ env.TAG }}.apk
+
+  # ---------- Flutter Web ----------
+  web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: birds
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Build Web
+        run: flutter build web --release --base-href /birds/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Web artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: birds/build/web
+
+  # ---------- Deploy Web to GitHub Pages ----------
+  deploy-web:
+    name: Deploy Web to GitHub Pages
+    needs: web
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   # ---------- GitHub Release ----------
   release:
