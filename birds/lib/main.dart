@@ -27,6 +27,7 @@ class BirdsApp extends StatelessWidget {
       builder: (context, themeMode, _) {
         return MaterialApp(
           title: 'Bird Library',
+          debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: themeMode,
