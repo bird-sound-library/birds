@@ -63,7 +63,7 @@ class _RecordingPageState extends State<RecordingPage> {
         errorMessage = e.toString();
       });
     }
-    return null;
+    return;
   }
 
   Future<void> stopRecording() async {
@@ -88,7 +88,7 @@ class _RecordingPageState extends State<RecordingPage> {
         errorMessage = e.toString();
       });
     }
-    return null;
+    return;
   }
 
   Future<void> uploadRecording() async {
@@ -126,7 +126,7 @@ class _RecordingPageState extends State<RecordingPage> {
         });
       }
     }
-    return null;
+    return;
   }
 
   String formatDuration(Duration value) {
