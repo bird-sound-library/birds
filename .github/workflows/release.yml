@@ -1,0 +1,103 @@
+name: Release
+
+# Runs when a version tag is pushed (e.g. v1.0.0), or manually from the Actions tab.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. v1.0.0)"
+        required: true
+
+permissions:
+  contents: write # needed to create a release and upload files
+
+env:
+  TAG: ${{ github.event.inputs.tag || github.ref_name }}
+
+jobs:
+  # ---------- Windows .exe ----------
+  windows:
+    name: Build Windows
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: birds
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Build Windows app
+        run: flutter build windows --release
+
+      # The .exe needs the DLLs and the data folder next to it, so we zip the whole folder.
+      - name: Zip build
+        shell: pwsh
+        run: Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath birds-windows-${{ env.TAG }}.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: birds/birds-windows-${{ env.TAG }}.zip
+
+  # ---------- Android .apk ----------
+  android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: birds
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk birds-android-${{ env.TAG }}.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android
+          path: birds/birds-android-${{ env.TAG }}.apk
+
+  # ---------- GitHub Release ----------
+  release:
+    name: Publish release
+    needs: [windows, android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: Birds ${{ env.TAG }}
+          generate_release_notes: true
+          files: |
+            dist/*.zip
+            dist/*.apk
