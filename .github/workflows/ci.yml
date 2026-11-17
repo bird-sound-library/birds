@@ -1,0 +1,90 @@
+name: CI/CD
+
+# Runs on every push to main and on every pull request.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # ---------- CI: backend ----------
+  backend:
+    name: Backend checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for leftover merge conflict markers
+        working-directory: .
+        run: |
+          if grep -rInE '^(<<<<<<<|>>>>>>>)( |$)' --exclude-dir=.git .; then
+            echo "::error::Merge conflict markers found. Resolve the conflict before merging."
+            exit 1
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check Python syntax
+        run: python -m compileall -q .
+
+      - name: Check that the app starts (import main)
+        env:
+          # Fake values: we only check that the code loads, no real DB connection is made.
+          DATABASE_URL: postgresql+psycopg://ci:ci@localhost:5432/ci
+          JWT_SECRET_KEY: ci-test-secret
+          XENO_CANTO_API_KEY: ""
+        run: python -c "import main; print('Backend imports OK,', len(main.app.routes), 'routes')"
+
+  # ---------- CI: Flutter app ----------
+  flutter:
+    name: Flutter checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: birds
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install packages
+        run: flutter pub get
+
+      - name: Static analysis
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
+      - name: Run tests
+        run: flutter test
+
+  # ---------- CD: deploy backend to Render ----------
+  deploy:
+    name: Deploy backend to Render
+    needs: [backend, flutter]
+    # Only after a push to main (not for pull requests), and only if all checks passed.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy hook
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$RENDER_DEPLOY_HOOK" ]; then
+            echo "::warning::RENDER_DEPLOY_HOOK secret is not set, skipping deploy."
+            exit 0
+          fi
+          curl -fsS -X POST "$RENDER_DEPLOY_HOOK"
+          echo "Deploy started on Render."

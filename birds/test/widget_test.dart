@@ -1,30 +1,45 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Unit tests for parsing backend JSON into app models.
+// They don't need a running backend or database, so they can run in CI.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:birds/main.dart';
+import 'package:birds/models/bird.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const BirdsApp());
+  group('Bird.fromJson', () {
+    test('parses main fields and nested sounds', () {
+      final bird = Bird.fromJson({
+        'bird_id': 1,
+        'common_name': 'House Sparrow',
+        'scientific_name': 'Passer domesticus',
+        'image_url': 'https://example.com/sparrow.jpg',
+        'sounds': [
+          {
+            'sound_id': 10,
+            'title': 'Song',
+            'file_url': 'https://example.com/song.mp3',
+            'duration': 12,
+          },
+        ],
+      });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      expect(bird.birdId, 1);
+      expect(bird.commonName, 'House Sparrow');
+      expect(bird.scientificName, 'Passer domesticus');
+      expect(bird.sounds, hasLength(1));
+      expect(bird.sounds.first.soundId, 10);
+      expect(bird.sounds.first.fileUrl, 'https://example.com/song.mp3');
+      expect(bird.sounds.first.duration, 12);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('handles missing optional fields', () {
+      final bird = Bird.fromJson({'bird_id': 2});
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      expect(bird.birdId, 2);
+      expect(bird.commonName, isNull);
+      expect(bird.description, isNull);
+      expect(bird.categories, isEmpty);
+      expect(bird.sounds, isEmpty);
+    });
   });
 }
