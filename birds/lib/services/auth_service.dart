@@ -60,7 +60,7 @@ class AuthService extends ChangeNotifier {
         'email': email.trim(),
         'password': password,
       }),
-    ).timeout(const Duration(seconds: 30));
+    ).timeout(const Duration(seconds: 60));
 
     if (response.statusCode != 201) {
       throw Exception(_errorMessage(response));
@@ -82,7 +82,7 @@ class AuthService extends ChangeNotifier {
         'email': email.trim(),
         'password': password,
       }),
-    ).timeout(const Duration(seconds: 30));
+    ).timeout(const Duration(seconds: 60));
 
     if (response.statusCode != 200) {
       throw Exception(_errorMessage(response));
@@ -138,7 +138,7 @@ class AuthService extends ChangeNotifier {
       body: jsonEncode({
         'refresh_token': refreshToken,
       }),
-    ).timeout(const Duration(seconds: 30));
+    ).timeout(const Duration(seconds: 60));
 
     if (response.statusCode == 401 ||
       response.statusCode == 403) {
@@ -170,7 +170,7 @@ class AuthService extends ChangeNotifier {
       headers: {
         'Authorization': 'Bearer $accessToken',
       },
-    ).timeout(const Duration(seconds: 30));
+    ).timeout(const Duration(seconds: 60));
 
     if (response.statusCode == 401) {
       final refreshed = await refreshSession();
@@ -203,7 +203,7 @@ class AuthService extends ChangeNotifier {
           body: jsonEncode({
             'refresh_token': token,
           }),
-        ).timeout(const Duration(seconds: 15));
+        ).timeout(const Duration(seconds: 60));
       }
     } finally {
       await _clearSession();

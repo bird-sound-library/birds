@@ -14,7 +14,7 @@ class BirdApi {
   Future<List<Bird>> getBirds() async {
     final response = await http
         .get(Uri.parse('$baseUrl/birds'))
-        .timeout(const Duration(seconds: 15));
+        .timeout(const Duration(seconds: 60));
 
     if (response.statusCode != 200) {
       throw Exception(
@@ -33,7 +33,7 @@ class BirdApi {
   Future<Bird> getBird(int birdId) async {
     final response = await http
         .get(Uri.parse('$baseUrl/birds/$birdId'))
-        .timeout(const Duration(seconds: 15));
+        .timeout(const Duration(seconds: 60));
 
     if (response.statusCode == 404) {
       throw Exception('Bird not found');
@@ -53,7 +53,7 @@ class BirdApi {
   Future<List<Sound>> getBirdSounds(int birdId) async {
     final response = await http
         .get(Uri.parse('$baseUrl/birds/$birdId/sounds'))
-        .timeout(const Duration(seconds: 15));
+        .timeout(const Duration(seconds: 60));
 
     if (response.statusCode != 200) {
       throw Exception(
@@ -79,7 +79,7 @@ class BirdApi {
       // In Chrome, the recorder returns a Blob URL.
       final audioResponse = await http
           .get(Uri.parse(filePath))
-          .timeout(const Duration(seconds: 30));
+          .timeout(const Duration(seconds: 60));
 
       if (audioResponse.statusCode != 200) {
         throw Exception('Could not read recorded audio');
