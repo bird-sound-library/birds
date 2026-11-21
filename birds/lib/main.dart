@@ -46,29 +46,30 @@ class BirdsPage extends StatefulWidget {
   State<BirdsPage> createState() => _BirdsPageState();
 }
 
-class _BirdsPageState extends State<BirdsPage> {
+class _BirdsPageState extends State<BirdsPage>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
   final BirdApi api = BirdApi();
   late Future<List<Bird>> birdsFuture;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 2, vsync: this);
     birdsFuture = api.getBirds();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   void reloadBirds() {
     setState(() {
       birdsFuture = api.getBirds();
     });
-  }
-
-  void openRecordingPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => const RecordingPage(),
-      ),
-    );
   }
 
   void openBirdDetails(Bird bird) {
@@ -156,9 +157,25 @@ class _BirdsPageState extends State<BirdsPage> {
             },
           ),
         ],
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(
+              icon: Icon(Icons.library_books_outlined),
+              text: 'Library',
+            ),
+            Tab(
+              icon: Icon(Icons.graphic_eq),
+              text: 'Recognize',
+            ),
+          ],
+        ),
       ),
 
-      body: Stack(
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          Stack(
         children: [
           // Blurred gradient background.
           Positioned.fill(
@@ -199,8 +216,8 @@ class _BirdsPageState extends State<BirdsPage> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: isDark
-                              ? const Color(0xFF777FC1).withOpacity(0.55)
-                              : const Color(0xFF929CEB).withOpacity(0.4),
+                              ? const Color(0xFF777FC1).withValues(alpha: 0.55)
+                              : const Color(0xFF929CEB).withValues(alpha: 0.4),
                         ),
                       ),
                     ),
@@ -220,8 +237,8 @@ class _BirdsPageState extends State<BirdsPage> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: isDark
-                              ? const Color(0xFF514078).withOpacity(0.6)
-                              : const Color(0xFFC0C7F6).withOpacity(0.5),
+                              ? const Color(0xFF514078).withValues(alpha: 0.6)
+                              : const Color(0xFFC0C7F6).withValues(alpha: 0.5),
                         ),
                       ),
                     ),
@@ -239,7 +256,7 @@ class _BirdsPageState extends State<BirdsPage> {
               child: Icon(
                 Icons.flutter_dash,
                 size: 170,
-                color: decorationColor.withOpacity(0.045),
+                color: decorationColor.withValues(alpha: 0.045),
               ),
             ),
           ),
@@ -250,7 +267,7 @@ class _BirdsPageState extends State<BirdsPage> {
               child: Icon(
                 Icons.eco_outlined,
                 size: 130,
-                color: decorationColor.withOpacity(0.04),
+                color: decorationColor.withValues(alpha: 0.04),
               ),
             ),
           ),
@@ -342,7 +359,7 @@ class _BirdsPageState extends State<BirdsPage> {
                                               .textTheme
                                               .bodyMedium
                                               ?.color
-                                              ?.withOpacity(0.75),
+                                              ?.withValues(alpha: 0.75),
                                         ),
                                   ),
                                 ],
@@ -352,7 +369,7 @@ class _BirdsPageState extends State<BirdsPage> {
                             Container(
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
-                                color: decorationColor.withOpacity(0.12),
+                                color: decorationColor.withValues(alpha: 0.12),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
@@ -395,13 +412,10 @@ class _BirdsPageState extends State<BirdsPage> {
               );
             },
           ),
+          ],
+          ),
+          const RecordingPage(),
         ],
-      ),
-
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: openRecordingPage,
-        icon: const Icon(Icons.mic),
-        label: const Text('Record bird'),
       ),
     );
   }

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -17,9 +16,7 @@ class BirdApi {
         .timeout(const Duration(seconds: 60));
 
     if (response.statusCode != 200) {
-      throw Exception(
-        'Failed to load birds: HTTP ${response.statusCode}',
-      );
+      throw Exception('Failed to load birds: HTTP ${response.statusCode}');
     }
 
     final List<dynamic> jsonList =
@@ -40,9 +37,7 @@ class BirdApi {
     }
 
     if (response.statusCode != 200) {
-      throw Exception(
-        'Failed to load bird: HTTP ${response.statusCode}',
-      );
+      throw Exception('Failed to load bird: HTTP ${response.statusCode}');
     }
 
     return Bird.fromJson(
@@ -94,10 +89,7 @@ class BirdApi {
       );
     } else {
       request.files.add(
-        await http.MultipartFile.fromPath(
-          'file',
-          filePath,
-        ),
+        await http.MultipartFile.fromPath('file', filePath),
       );
     }
 
@@ -111,10 +103,21 @@ class BirdApi {
 
     final response = await http.Response.fromStream(streamedResponse);
 
+    if (response.statusCode == 413) {
+      throw Exception('Recording is too long. Maximum duration is 15 seconds.');
+    }
+
     if (response.statusCode != 201) {
-      throw Exception(
-        'Upload failed (${response.statusCode}): ${response.body}',
-      );
+      String details = response.body;
+      try {
+        final decoded = jsonDecode(response.body);
+        if (decoded is Map && decoded['detail'] != null) {
+          details = decoded['detail'].toString();
+        }
+      } catch (_) {
+        // Keep the original response body.
+      }
+      throw Exception('Upload failed (${response.statusCode}): $details');
     }
 
     return jsonDecode(response.body) as Map<String, dynamic>;

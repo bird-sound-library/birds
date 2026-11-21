@@ -1,5 +1,8 @@
-
 import uuid
+import asyncio
+from functools import lru_cache
+
+from gradio_client import Client, handle_file
 import logging
 from pathlib import Path
 from datetime import datetime, timezone
@@ -13,7 +16,7 @@ from sqlalchemy.orm import Session, selectinload
 from mutagen import File as MutagenFile
 
 from database import get_db
-from models import Bird, Recording, User
+from models import Bird, Recording, User, IdentifiedAs, DetectionInterval
 from schemas import BirdResponse, SoundResponse, RecordingResponse
 from routers.auth import router as auth_router
 from dependencies import get_current_user, get_optional_user
@@ -124,6 +127,7 @@ ALLOWED_EXTENSIONS = {
 }
 
 MAX_FILE_SIZE = 25 * 1024 * 1024
+MAX_RECORDING_DURATION = Decimal("15.0")
 
 
 def get_audio_duration(file_path: Path) -> Decimal:
@@ -139,12 +143,64 @@ def get_audio_duration(file_path: Path) -> Decimal:
 
     return Decimal(str(duration))
 
+@lru_cache(maxsize=1)
+def get_huggingface_client() -> Client:
+    token = settings.hf_token.get_secret_value() or None
+    return Client(
+        settings.hf_space_id,
+        token=token,
+        verbose=False
+    )
+
+
+def _recognize_with_huggingface(file_path: Path) -> dict:
+    client = get_huggingface_client()
+    result = client.predict(
+        audio_path=handle_file(str(file_path)),
+        api_name="/recognize_audio"
+    )
+
+    if not isinstance(result, dict):
+        raise ValueError(
+            f"Unexpected Hugging Face response type: {type(result).__name__}"
+        )
+    if result.get("status") not in {"completed", "no_match"}:
+        raise ValueError("Unexpected BirdNET response status")
+    if not isinstance(result.get("species"), list):
+        raise ValueError("Invalid BirdNET species data")
+
+    return result
+
+
+async def recognize_with_birdnet(file_path: Path) -> dict:
+    # gradio_client is synchronous; keep it off FastAPI's event loop.
+    return await asyncio.to_thread(
+        _recognize_with_huggingface,
+        file_path
+    )
+
+
+def load_recording_response(db: Session, recording_id: int):
+    statement = (
+        select(Recording)
+        .options(
+            selectinload(Recording.identifications)
+            .selectinload(IdentifiedAs.bird),
+
+            selectinload(Recording.identifications)
+            .selectinload(IdentifiedAs.intervals)
+        )
+        .where(Recording.recording_id == recording_id)
+    )
+
+    return db.scalar(statement)
 
 @app.post(
     "/recordings",
     response_model=RecordingResponse,
     status_code=201
 )
+
 async def upload_recording(
     file: UploadFile = File(...),
     location: str | None = Form(None),
@@ -169,7 +225,6 @@ async def upload_recording(
     try:
         oldest_recording = None
 
-        # Limit and lock apply only to authenticated users
         if user is not None:
             locked_user = db.scalar(
                 select(User)
@@ -200,7 +255,7 @@ async def upload_recording(
                     .limit(1)
                 )
 
-        # Save audio file
+        # 1. Save audio
         with file_path.open("wb") as output:
             while True:
                 chunk = await file.read(1024 * 1024)
@@ -218,22 +273,27 @@ async def upload_recording(
 
                 output.write(chunk)
 
-        # Validate audio
+        # 2. Validate audio
         try:
             duration = get_audio_duration(file_path)
         except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
+        if duration > MAX_RECORDING_DURATION:
             raise HTTPException(
-                status_code=400,
-                detail=str(exc)
+            status_code=413,
+            detail=(
+                "Recording is too long. "
+                f"Maximum duration is "
+                f"{MAX_RECORDING_DURATION} seconds."
             )
-
-        # Create recording (user_id = None for guests)
+        )
+        # 3. Create recording before inference
         recording = Recording(
-            user_id=user.user_id if user is not None else None,
+            user_id=user.user_id if user else None,
             file_url=f"/uploads/{filename}",
             recorded_at=datetime.now(timezone.utc).replace(tzinfo=None),
             location=location,
-            status="uploaded",
+            status="processing",
             duration=duration,
             confidence=None
         )
@@ -241,28 +301,117 @@ async def upload_recording(
         db.add(recording)
 
         if oldest_recording is not None:
-            old_file_path = (
-                UPLOAD_DIR / Path(oldest_recording.file_url).name
-            )
+            old_file_path = UPLOAD_DIR / Path(
+                oldest_recording.file_url
+            ).name
             db.delete(oldest_recording)
 
         db.commit()
         committed = True
-
         db.refresh(recording)
 
         if old_file_path is not None:
             old_file_path.unlink(missing_ok=True)
 
-        return recording
+        # 4. Run BirdNET
+        try:
+            result = await recognize_with_birdnet(file_path)
+
+        except Exception:
+            logger.exception(
+                "BirdNET inference failed for recording %s",
+                recording.recording_id
+            )
+
+            recording.status = "failed"
+            db.commit()
+
+            return load_recording_response(db, recording.recording_id)
+
+        # 5. Save identification results
+        species_list = result.get("species", [])
+        confidences = []
+
+        for species in species_list:
+            scientific_name = species.get("scientific_name")
+
+            if not scientific_name:
+                continue
+
+            bird = db.scalar(
+                select(Bird).where(
+                    Bird.scientific_name == scientific_name
+                )
+            )
+
+            # Skip species not present in our catalog
+            if bird is None:
+                logger.warning(
+                    "Bird not found in catalog: %s",
+                    scientific_name
+                )
+                continue
+
+            max_confidence = Decimal(
+                str(species["max_confidence"])
+            )
+            avg_confidence = Decimal(
+                str(species["avg_confidence"])
+            )
+
+            confidences.append(max_confidence)
+
+            identification = IdentifiedAs(
+                recording_id=recording.recording_id,
+                bird_id=bird.bird_id,
+                model_version="BirdNET 3.0",
+                identified_at=datetime.now(timezone.utc).replace(
+                    tzinfo=None
+                ),
+                detections=int(species.get("detections", 0)),
+                max_confidence=max_confidence,
+                avg_confidence=avg_confidence
+            )
+
+            db.add(identification)
+
+            for index, interval in enumerate(
+                species.get("intervals", [])
+            ):
+                db.add(
+                    DetectionInterval(
+                        recording_id=recording.recording_id,
+                        bird_id=bird.bird_id,
+                        interval_index=index,
+                        start_time=Decimal(str(interval["start"])),
+                        end_time=Decimal(str(interval["end"]))
+                    )
+                )
+
+        recording.confidence = (
+            max(confidences) if confidences else None
+        )
+
+        recording.status = (
+            "completed" if species_list else "no_match"
+        )
+
+        db.commit()
+
+        return load_recording_response(db, recording.recording_id)
+
+    except HTTPException:
+        if not committed:
+            db.rollback()
+            file_path.unlink(missing_ok=True)
+        raise
 
     except Exception:
         if not committed:
             db.rollback()
-
-            if file_path.exists():
-                file_path.unlink(missing_ok=True)
-
+            file_path.unlink(missing_ok=True)
+        else:
+            db.rollback()
         raise
 
     finally:

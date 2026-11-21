@@ -9,6 +9,10 @@ BASE_DIR = Path(__file__).resolve().parent
 
 
 class Settings(BaseSettings):
+    hf_space_id: str = "Mickhail719/birdnet-inference"
+    hf_token: SecretStr = SecretStr("")
+    birdnet_inference_url: str = "http://127.0.0.1:8001"
+    birdnet_api_key: SecretStr = SecretStr("")
     model_config = SettingsConfigDict(
         env_file=BASE_DIR / ".env",
         env_file_encoding="utf-8",

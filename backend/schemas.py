@@ -43,6 +43,61 @@ class BirdResponse(BaseModel):
         "from_attributes": True
     }
 
+class DetectionIntervalResponse(BaseModel):
+    start_time: Decimal
+    end_time: Decimal
+
+    model_config = {
+        "from_attributes": True
+    }
+
+
+class IdentificationResponse(BaseModel):
+    bird_id: int
+    model_version: str | None
+    detections: int
+    max_confidence: Decimal | None
+    avg_confidence: Decimal | None
+
+    intervals: list[DetectionIntervalResponse] = Field(
+        default_factory=list
+    )
+
+    bird: BirdResponse
+
+    model_config = {
+        "from_attributes": True
+    }
+
+
+class DetectionIntervalResponse(BaseModel):
+    start_time: Decimal
+    end_time: Decimal
+
+    model_config = {"from_attributes": True}
+
+
+class IdentifiedBirdResponse(BaseModel):
+    bird_id: int
+    scientific_name: str | None
+    common_name: str | None
+
+    model_config = {"from_attributes": True}
+
+
+class IdentificationResponse(BaseModel):
+    bird: IdentifiedBirdResponse
+    detections: int
+    max_confidence: Decimal | None
+    avg_confidence: Decimal | None
+    model_version: str | None
+    intervals: list[DetectionIntervalResponse] = Field(
+        default_factory=list
+    )
+
+    model_config = {"from_attributes": True}
+
+
 class RecordingResponse(BaseModel):
     recording_id: int
     file_url: str | None
@@ -55,6 +110,9 @@ class RecordingResponse(BaseModel):
     model_config = {
         "from_attributes": True
     }
+    identifications: list[IdentificationResponse] = Field(
+        default_factory=list
+    )
 
 class UserCreate(BaseModel):
     email: EmailStr

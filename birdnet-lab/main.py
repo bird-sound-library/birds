@@ -1,14 +1,17 @@
-
 import os
 import hmac
 import tempfile
 from pathlib import Path
+from dotenv import load_dotenv
 
 from fastapi import FastAPI, UploadFile, File, Header, HTTPException
 from contextlib import asynccontextmanager
 
 from birdnet_service import BirdNETService
 
+load_dotenv(
+    Path(__file__).resolve().parent / ".env"
+)
 
 MAX_FILE_SIZE = 25 * 1024 * 1024
 

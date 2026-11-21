@@ -14,6 +14,8 @@ from sqlalchemy import (
     Boolean,
     func,
     Uuid,
+    ForeignKeyConstraint,
+    CheckConstraint
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -455,15 +457,40 @@ class Classifies(Base):
     )
 
 
+class DetectionInterval(Base):
+    __tablename__ = "detection_interval"
+
+    recording_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    bird_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    interval_index: Mapped[int] = mapped_column(Integer, primary_key=True)
+
+    start_time: Mapped[Decimal] = mapped_column(Numeric(10, 3), nullable=False)
+    end_time: Mapped[Decimal] = mapped_column(Numeric(10, 3), nullable=False)
+
+    __table_args__ = (
+        ForeignKeyConstraint(
+            ["recording_id", "bird_id"],
+            ["identified_as.recording_id", "identified_as.bird_id"],
+            ondelete="CASCADE"
+        ),
+        CheckConstraint(
+            "start_time >= 0 AND end_time >= start_time",
+            name="ck_detection_interval_valid_time"
+        ),
+    )
+
+    identification: Mapped["IdentifiedAs"] = relationship(
+        back_populates="intervals"
+    )
+
+
 # ============================================================
 # IdentifiedAs
 # ============================================================
 
+
 class IdentifiedAs(Base):
     __tablename__ = "identified_as"
-
-    # Composite Primary Key:
-    # recording_id + bird_id
 
     recording_id: Mapped[int] = mapped_column(
         ForeignKey("recording.recording_id", ondelete="CASCADE"),
@@ -483,6 +510,27 @@ class IdentifiedAs(Base):
     identified_at: Mapped[datetime | None] = mapped_column(
         DateTime,
         nullable=True
+    )
+
+    detections: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        default=0
+    )
+
+    max_confidence: Mapped[Decimal | None] = mapped_column(
+        Numeric(5, 4),
+        nullable=True
+    )
+
+    avg_confidence: Mapped[Decimal | None] = mapped_column(
+        Numeric(5, 4),
+        nullable=True
+    )
+
+    intervals: Mapped[list["DetectionInterval"]] = relationship(
+        back_populates="identification",
+        cascade="all, delete-orphan"
     )
 
     recording: Mapped["Recording"] = relationship(
