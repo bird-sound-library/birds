@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 import '../models/sound.dart';
+import '../services/cache_service.dart';
 
 class SoundPlayerTile extends StatefulWidget {
   final Sound sound;
@@ -58,6 +58,7 @@ class _SoundPlayerTileState extends State<SoundPlayerTile> {
     _applyLoopMode();
   }
 
+
   Future<void> togglePlayback() async {
     if (loading) return;
 
@@ -94,7 +95,8 @@ class _SoundPlayerTileState extends State<SoundPlayerTile> {
       activePlayer = player;
 
       if (player.processingState == ProcessingState.idle) {
-        await player.setUrl(url);
+        final cachedFile = await BirdCacheService.instance.getAudioFile(url);
+        await player.setFilePath(cachedFile.path);
       }
 
       if (player.processingState == ProcessingState.completed) {

@@ -383,7 +383,7 @@ class _RecordingPageState extends State<RecordingPage> {
                               width: double.infinity,
                               height: 240,
                               fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) =>
+                              errorBuilder: (_, _, _) =>
                                   _birdImageFallback(colors),
                             );
                           }
@@ -526,7 +526,7 @@ class _RecordingPageState extends State<RecordingPage> {
         ? result['identifications'] as List
         : const [];
 
-    final isCompleted = status == 'completed';
+    //final isCompleted = status == 'completed';
     final isNoMatch = status == 'no_match';
 
     return Card(

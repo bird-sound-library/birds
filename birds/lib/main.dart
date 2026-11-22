@@ -2,6 +2,7 @@
 import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'models/bird.dart';
 import 'services/bird_api.dart';
@@ -27,7 +28,7 @@ class BirdsApp extends StatelessWidget {
       valueListenable: themeModeNotifier,
       builder: (context, themeMode, _) {
         return MaterialApp(
-          title: 'Bird Library',
+          title: 'Birds',
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,
@@ -46,12 +47,15 @@ class BirdsPage extends StatefulWidget {
   State<BirdsPage> createState() => _BirdsPageState();
 }
 
+enum BirdSortMode { id, asc, desc }
+
 class _BirdsPageState extends State<BirdsPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
   final BirdApi api = BirdApi();
   late Future<List<Bird>> birdsFuture;
+  BirdSortMode _sortMode = BirdSortMode.id;
 
   @override
   void initState() {
@@ -88,23 +92,61 @@ class _BirdsPageState extends State<BirdsPage>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Bird Library',
-          style: TextStyle(fontWeight: FontWeight.w600),
+        titleSpacing: 12,
+        title: Row(
+          children: [
+            const Text(
+              'Birds',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: TabBar(
+                controller: _tabController,
+                indicatorSize: TabBarIndicatorSize.label,
+                labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                labelStyle: const TextStyle(fontSize: 11, height: 1),
+                unselectedLabelStyle: const TextStyle(fontSize: 11, height: 1),
+                tabs: const [
+                  Tab(
+                    icon: Icon(Icons.library_books_outlined, size: 16),
+                    text: 'Library',
+                  ),
+                  Tab(
+                    icon: Icon(Icons.graphic_eq, size: 16),
+                    text: 'Recognize',
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         actions: [
           IconButton(
             onPressed: () => toggleTheme(context),
             icon: Icon(
               isDark ? Icons.light_mode : Icons.dark_mode,
+              size: 28,
             ),
             tooltip: 'Toggle theme',
+            padding: const EdgeInsets.all(8),
+            constraints: const BoxConstraints(
+              minWidth: 50,
+              minHeight: 50,
+            ),
           ),
+          const SizedBox(width: 8),
           IconButton(
             onPressed: reloadBirds,
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh, size: 28),
             tooltip: 'Refresh',
+            padding: const EdgeInsets.all(8),
+            constraints: const BoxConstraints(
+              minWidth: 50,
+              minHeight: 50,
+            ),
           ),
+          const SizedBox(width: 8),
           AnimatedBuilder(
             animation: AuthService.instance,
             builder: (context, _) {
@@ -116,6 +158,12 @@ class _BirdsPageState extends State<BirdsPage>
                   user == null
                       ? Icons.login
                       : Icons.account_circle,
+                  size: 28,
+                ),
+                padding: const EdgeInsets.all(8),
+                constraints: const BoxConstraints(
+                  minWidth: 50,
+                  minHeight: 50,
                 ),
                 onPressed: () async {
                   if (user == null) {
@@ -156,20 +204,8 @@ class _BirdsPageState extends State<BirdsPage>
               );
             },
           ),
+          const SizedBox(width: 6),
         ],
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(
-              icon: Icon(Icons.library_books_outlined),
-              text: 'Library',
-            ),
-            Tab(
-              icon: Icon(Icons.graphic_eq),
-              text: 'Recognize',
-            ),
-          ],
-        ),
       ),
 
       body: TabBarView(
@@ -309,7 +345,18 @@ class _BirdsPageState extends State<BirdsPage>
                 );
               }
 
-              final birds = snapshot.data ?? [];
+              final birds = [...?snapshot.data];
+
+              // ID mode preserves the API's original order.
+              if (_sortMode == BirdSortMode.asc) {
+                birds.sort((a, b) => (a.commonName ?? '')
+                    .toLowerCase()
+                    .compareTo((b.commonName ?? '').toLowerCase()));
+              } else if (_sortMode == BirdSortMode.desc) {
+                birds.sort((a, b) => (b.commonName ?? '')
+                    .toLowerCase()
+                    .compareTo((a.commonName ?? '').toLowerCase()));
+              }
 
               if (birds.isEmpty) {
                 return const Center(
@@ -319,8 +366,7 @@ class _BirdsPageState extends State<BirdsPage>
 
               return LayoutBuilder(
                 builder: (context, constraints) {
-                  final columns =
-                      constraints.maxWidth < 600 ? 2 : 3;
+                  final columns = constraints.maxWidth >= 1200 ? 5 : 3;
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -328,7 +374,7 @@ class _BirdsPageState extends State<BirdsPage>
                       // Welcome section.
                       Padding(
                         padding: const EdgeInsets.fromLTRB(
-                          22, 24, 22, 20,
+                          16, 12, 16, 12,
                         ),
                         child: Row(
                           children: [
@@ -341,19 +387,19 @@ class _BirdsPageState extends State<BirdsPage>
                                     'Discover the world of birds',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .headlineMedium
+                                        .titleLarge
                                         ?.copyWith(
                                           fontWeight: FontWeight.bold,
-                                          letterSpacing: -0.7,
+                                          letterSpacing: -0.5,
                                         ),
                                   ),
-                                  const SizedBox(height: 8),
+                                  const SizedBox(height: 3),
                                   Text(
                                     'Explore beautiful species and listen '
                                     'to the sounds of nature.',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyLarge
+                                        .bodyMedium
                                         ?.copyWith(
                                           color: Theme.of(context)
                                               .textTheme
@@ -365,17 +411,38 @@ class _BirdsPageState extends State<BirdsPage>
                                 ],
                               ),
                             ),
-                            const SizedBox(width: 12),
-                            Container(
-                              padding: const EdgeInsets.all(14),
-                              decoration: BoxDecoration(
-                                color: decorationColor.withValues(alpha: 0.12),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.flutter_dash,
-                                size: 34,
-                                color: decorationColor,
+                            const SizedBox(width: 8),
+                            PopupMenuButton<BirdSortMode>(
+                              tooltip: 'Sort birds',
+                              initialValue: _sortMode,
+                              onSelected: (mode) {
+                                setState(() => _sortMode = mode);
+                              },
+                              itemBuilder: (context) => const [
+                                PopupMenuItem(
+                                  value: BirdSortMode.id,
+                                  child: Text('By ID (default order)'),
+                                ),
+                                PopupMenuItem(
+                                  value: BirdSortMode.asc,
+                                  child: Text('Name: A–Z'),
+                                ),
+                                PopupMenuItem(
+                                  value: BirdSortMode.desc,
+                                  child: Text('Name: Z–A'),
+                                ),
+                              ],
+                              child: Container(
+                                padding: const EdgeInsets.all(9),
+                                decoration: BoxDecoration(
+                                  color: decorationColor.withValues(alpha: 0.12),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.sort,
+                                  size: 23,
+                                  color: decorationColor,
+                                ),
                               ),
                             ),
                           ],
@@ -386,15 +453,15 @@ class _BirdsPageState extends State<BirdsPage>
                       Expanded(
                         child: GridView.builder(
                           padding: const EdgeInsets.fromLTRB(
-                            20, 0, 20, 24,
+                            12, 0, 12, 20,
                           ),
                           itemCount: birds.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: columns,
-                            crossAxisSpacing: 18,
-                            mainAxisSpacing: 18,
-                            childAspectRatio: 0.82,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 0.78,
                           ),
                           itemBuilder: (context, index) {
                             final bird = birds[index];
@@ -468,21 +535,16 @@ class _BirdCardState extends State<BirdCard> {
                     width: double.infinity,
                     child: widget.bird.imageUrl != null &&
                             widget.bird.imageUrl!.isNotEmpty
-                        ? Image.network(
-                            widget.bird.imageUrl!,
+                        ? CachedNetworkImage(
+                            imageUrl: widget.bird.imageUrl!,
                             fit: BoxFit.cover,
-                            errorBuilder: (
-                              context,
-                              error,
-                              stackTrace,
-                            ) {
-                              return const Center(
-                                child: Icon(
-                                  Icons.flutter_dash,
-                                  size: 50,
-                                ),
-                              );
-                            },
+                            memCacheWidth: 700,
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                            errorWidget: (context, url, error) => const Center(
+                              child: Icon(Icons.flutter_dash, size: 34),
+                            ),
                           )
                         : const Center(
                             child: Icon(
@@ -493,7 +555,7 @@ class _BirdCardState extends State<BirdCard> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -503,10 +565,10 @@ class _BirdCardState extends State<BirdCard> {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 13,
                         ),
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 3),
                       Text(
                         widget.bird.scientificName ??
                             'Scientific name unavailable',

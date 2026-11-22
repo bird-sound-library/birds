@@ -1,4 +1,3 @@
-import 'dart:ui' show ImageFilter;
 import 'package:flutter/material.dart';
 
 /// Current theme mode of the app.

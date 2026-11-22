@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+import '../services/cache_service.dart';
 
 import '../models/bird.dart';
 import '../models/sound.dart';
@@ -84,16 +87,20 @@ class _BirdDetailsPageState extends State<BirdDetailsPage> {
                     color: colors.surface,
                     child: bird.imageUrl != null &&
                             bird.imageUrl!.isNotEmpty
-                        ? Image.network(
-                            bird.imageUrl!,
+                        ? CachedNetworkImage(
+                            imageUrl: bird.imageUrl!,
+                            cacheManager: BirdCacheService.imageCache,
                             fit: BoxFit.contain,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Icon(
-                                Icons.flutter_dash,
-                                size: 70,
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(
                                 color: colors.primary,
-                              );
-                            },
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Icon(
+                              Icons.flutter_dash,
+                              size: 70,
+                              color: colors.primary,
+                            ),
                           )
                         : Icon(
                             Icons.flutter_dash,
@@ -133,10 +140,10 @@ class _BirdDetailsPageState extends State<BirdDetailsPage> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: colors.surface.withOpacity(0.85),
+                color: colors.surface.withValues(alpha: 0.85),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: colors.primary.withOpacity(0.12),
+                  color: colors.primary.withValues(alpha: 0.12),
                 ),
               ),
               child: Column(
@@ -170,7 +177,7 @@ class _BirdDetailsPageState extends State<BirdDetailsPage> {
                   if (bird.wikipediaUrl != null) ...[
                     const SizedBox(height: 18),
                     Divider(
-                      color: colors.primary.withOpacity(0.15),
+                      color: colors.primary.withValues(alpha: 0.15),
                     ),
                     const SizedBox(height: 10),
 
@@ -223,7 +230,7 @@ class _BirdDetailsPageState extends State<BirdDetailsPage> {
             Text(
               'Listen to recordings of this species',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: colors.onSurface.withOpacity(0.65),
+                color: colors.onSurface.withValues(alpha: 0.65),
               ),
             ),
 
