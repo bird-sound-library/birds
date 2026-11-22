@@ -366,7 +366,11 @@ class _BirdsPageState extends State<BirdsPage>
 
               return LayoutBuilder(
                 builder: (context, constraints) {
-                  final columns = constraints.maxWidth >= 1200 ? 5 : 3;
+                  final columns = constraints.maxWidth >= 1200
+                      ? 5
+                      : constraints.maxWidth >= 600
+                          ? 3
+                          : 2;
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
