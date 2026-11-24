@@ -1,4 +1,3 @@
-
 name: Release
 
 on:
@@ -10,6 +9,7 @@ on:
       tag:
         description: "Release tag (e.g. v1.0.1)"
         required: true
+        type: string
 
 permissions:
   contents: write
@@ -69,10 +69,51 @@ jobs:
           channel: stable
           cache: true
 
-      - run: flutter pub get
+      - name: Install Flutter dependencies
+        run: flutter pub get
 
-      - name: Build APK
+      - name: Configure persistent Android signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          for secret_name in ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD; do
+            if [[ -z "${!secret_name}" ]]; then
+              echo "::error::Missing GitHub Actions secret: ${secret_name}"
+              exit 1
+            fi
+          done
+
+          KEYSTORE_PATH="${RUNNER_TEMP}/birds-release-keystore.jks"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_PATH"
+          test -s "$KEYSTORE_PATH"
+
+          {
+            printf 'storePassword=%s\n' "$ANDROID_KEYSTORE_PASSWORD"
+            printf 'keyPassword=%s\n' "$ANDROID_KEY_PASSWORD"
+            printf 'keyAlias=%s\n' "$ANDROID_KEY_ALIAS"
+            printf 'storeFile=%s\n' "$KEYSTORE_PATH"
+          } > android/key.properties
+
+      - name: Build signed Android APK
         run: flutter build apk --release
+
+      - name: Verify APK signature
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          APKSIGNER="$(find "$SDK_ROOT/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
+          if [[ -z "$APKSIGNER" ]]; then
+            echo "::error::Android apksigner was not found."
+            exit 1
+          fi
+          "$APKSIGNER" verify --verbose --print-certs build/app/outputs/flutter-apk/app-release.apk
 
       - name: Rename APK
         run: mv build/app/outputs/flutter-apk/app-release.apk birds-android-${{ env.TAG }}.apk
